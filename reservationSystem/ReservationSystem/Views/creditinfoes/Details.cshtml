@@ -1,0 +1,66 @@
+﻿@model ReservationSystem.creditinfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>creditinfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contact.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reservation.bId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reservation.bId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cardType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.creditId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

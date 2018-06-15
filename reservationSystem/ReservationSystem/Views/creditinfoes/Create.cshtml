@@ -1,0 +1,107 @@
+﻿@model ReservationSystem.creditinfo
+
+@{
+    ViewBag.Title = "Enter";
+}
+
+<h2>Enter Card Details</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <!-- <h4>Credit Info</h4> -->
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.cardType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.cardType, "VISA", true)@Html.Label("VISA")
+                @Html.RadioButtonFor(model => model.cardType, "Master", true)@Html.Label("Master")
+                @Html.RadioButtonFor(model => model.cardType, "American Express", true)@Html.Label("American Express")
+                @Html.ValidationMessageFor(model => model.cardType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cardNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.expDate, new { htmlAttributes = new { @class = "datepicker", @PlaceHolder = "MM/YYYY" } })
+                @Html.ValidationMessageFor(model => model.expDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <p> <a href="@Url.Action("Create","contacts")" class="btn btn-default">Back</a></p>
+                </div>
+                <div class="col-md-offset-2 col-md-6">
+                    <input type="submit" value="Book" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--
+<div>
+    @Html.ActionLink("Back", "Edit", "contacts", new { id = ViewBag.cId})
+</div>
+    -->
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2018:2031",
+                dateFormat: "mm/yy",
+                showOn: "both",
+                showButtonPanel: true,
+                onClose: function (dateText, inst) {
+
+                    //Get the selected month value
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+
+                    //Get the selected year value
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+
+                    //set month value to the textbox
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                },
+                buttonText: "<i class='fa fa-calendar-month'></i>"
+
+            });
+            $(".datepicker").focus(function () {
+                $(".ui-datepicker-calendar").hide();
+                $("#ui-datepicker-div").position({
+                    my: "center top",
+                    at: "center bottom",
+                    of: $(this)
+                });
+            });
+        });
+    </script>
+}

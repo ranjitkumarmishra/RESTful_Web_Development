@@ -1,0 +1,88 @@
+﻿@model ReservationSystem.reservation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modify</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Reservation</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.bId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.checkInDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.checkInDate, new
+            {
+                htmlAttributes = new { @class = "datepicker", @PlaceHolder = "mm/dd/yyyy" }
+            })
+            @Html.ValidationMessageFor(model => model.checkInDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.checkOutDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.checkOutDate, new { htmlAttributes = new { @class = "datepicker", @PlaceHolder = "mm/dd/yyyy" } })
+            @Html.ValidationMessageFor(model => model.checkOutDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.noOfGuest, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.noOfGuest, new SelectList(Model.counts, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.noOfGuest, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.noOfRooms, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.noOfRooms, new SelectList(Model.counts, "Value", "Text"))
+            @Html.ValidationMessageFor(model => model.noOfRooms, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <p> <a href="@Url.Action("Delete", "Reservations",new { id = Model.bId })" class="btn btn-default">Cancel</a></p>
+            </div>
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+}
+<!--
+<div>
+    @Html.ActionLink("Back", "Index", "Home")
+</div>
+-->
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2018:2031",
+                dateFormat: "mm/dd/yy",
+                showOn: "both",
+                showButtonPanel: true,
+                buttonText: "<i class='fa fa-calendar-square'></i>"
+            });
+        });
+    </script>
+}
